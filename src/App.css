@@ -1,0 +1,47 @@
+.center-div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Horizontally center content */
+    align-items: center; /* Vertically center content */
+    height: 100vh; /* Full viewport height */
+}
+
+.forms-div {
+    display: flex;
+    flex-direction: row;
+}
+
+form {
+    max-width: 300px;
+    padding: 20px;
+    background-color: #f4f4f4;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Style form labels */
+form label {
+    display: block;
+}
+
+form textarea {
+    height: 100px;
+    overflow-y: auto;
+    width: 15rem;
+    padding: 2rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+form button{
+    background-color: #007BFF;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+form button:hover {
+    background-color: #0056b3;
+}
