@@ -1,0 +1,83 @@
+"US": {
+    "siteId": 300000001,
+    "supportPhoneNumber": {
+      "*": "+1 417-521-0845"
+    },
+    "TPID": 3001,
+    "EAPID": 1,
+    "flightsEnabled": false,
+    "carsEnabled": false,
+    "lxEnabled": false,
+    "packagesEnabled": false,
+    "swpEnabled:hotels": true,
+    "earnMessageEnabled:hotels": true,
+    "doNotSellMyPersonalInformationEnabled": true,
+    "carsWebViewEnabled": false,
+    "url": "www.hotels.com",
+    "countryCode": "USA",
+    "supportedLocales": [
+      {
+        "appLanguage": {
+          "ios": "en"
+        },
+        "localeIdentifier": "en_US",
+        "languageCode": "en",
+        "languageIdentifier": 1033,
+        "localeBasedPointOfSaleName": "HCOM_US",
+        "appInfoURL": "https://www.hotels.com/page/app/?pos=HCOM_US&locale=en_US",
+        "createAccountMarketingText": "Please send me Hotels.com emails with travel deals, special offers and other information.",
+        "forgotPasswordURL": "https://www.hotels.com/forgotpassword",
+        "appSupportURLs": {
+          "ios": "https://mobiata.zendesk.com/hc/en-us/categories/201854626-Expedia-iOS"
+        },
+        "bookingSupportURL": "https://service.hotels.com/en-us/",
+        "websiteURL": "https://www.hotels.com/",
+        "accountURL": "https://www.hotels.com/user/account",
+        "termsAndConditionsURL": "https://www.hotels.com/customer_care/terms_conditions.html?pos=HCOM_US&locale=en_US",
+        "learnAboutSortAndFilterURL": "https://service.hotels.com/en-us/#/article/19645",
+        "privacyPolicyURL": "https://www.hotels.com/customer_care/privacy.html",
+        "doNotSellMyPersonalInformationURL": "https://www.hotels.com/profile/dnsmpi-consent/consent.html",
+        "resultsSortFAQLegalLink": "https://service.hotels.com/en-us/#/myTrips/20776",
+        "loyaltyTermsAndConditionsURL": "https://www.hotels.com/lp/b/hcom-rewards-terms?locale=en_US",
+        "coronavirusInfoUrl": "https://www.expedia.com/service/#/articles/398/61",
+        "creditCardUrl": "creditcard?pos=HCOM_US&locale=en_US&intlid=accountMenuCTAClicked"
+      },
+      {
+        "appLanguage": {
+          "ios": "es-US"
+        },
+        "localeIdentifier": "es_US",
+        "languageCode": "es-US",
+        "languageIdentifier": 21514,
+        "localeSpecificSupportPhoneNumber": "+1 (404) 728 8787",
+        "localeBasedPointOfSaleName": "HCOM_US",
+        "appInfoURL": "https://es.hotels.com/page/app/?pos=HCOM_US&locale=es_US",
+        "createAccountMarketingText": "Quiero recibir emails de Hotels.com con descuentos de viaje, ofertas especiales y otra información.",
+        "forgotPasswordURL": "https://www.hotels.com/forgotpassword",
+        "bookingSupportURL": "https://service.hotels.com/es-us/",
+        "websiteURL": "https://www.hotels.com/es",
+        "accountURL": "https://www.hotels.com/user/account",
+        "termsAndConditionsURL": "https://es.hotels.com/customer_care/terms_conditions.html?pos=HCOM_US&locale=es_US",
+        "privacyPolicyURL": "https://www.hotels.com/es/lp/b/privacy?locale=es_US",
+        "doNotSellMyPersonalInformationURL": "https://es.hotels.com/profile/dnsmpi-consent/consent.html",
+        "resultsSortFAQLegalLink": "https://service.hotels.com/es-us/#/article/24034",
+        "loyaltyTermsAndConditionsURL": "https://www.hotels.com/lp/b/hcom-rewards-terms?locale=es_US",
+        "creditCardUrl": "creditcard?pos=HCOM_US&locale=es_US&intlid=accountMenuCTAClicked"
+      }
+    ],
+    "branding": "Hotels.com",
+    "deepLinkDateFormat": "MM/dd/yyyy",
+    "pointOfSaleId": 300000001,
+    "automaticallyMappedLocales": [
+      "en_US",
+      "es_US"
+    ],
+    "shouldDisplayAveragePrices": true,
+    "supportsVipAccess": true,
+    "shouldShowRewards": true,
+    "marketingOptIn": "DO_NOT_SHOW_AUTO_ENROLL",
+    "showPackageFreeUnrealDeal": true,
+    "hotMIPSavingsPercentage": "43",
+    "cookiePolicyURLString": "customer_care/cookie_policy.html",
+    "enrollInLoyalty": true
+  }
