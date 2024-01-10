@@ -7,7 +7,7 @@ export async function getDetails(hotelId: String) {
         url: 'https://hotels4.p.rapidapi.com/properties/v2/detail',
         headers: {
           'content-type': 'application/json',
-          'X-RapidAPI-Key': '193ebaa4b5msh889c774df79466cp112556jsn5dd40c53f272',
+          'X-RapidAPI-Key': '16f6894920msh2be1dfcd82b9b42p1614b2jsn31772ace51f9',
           'X-RapidAPI-Host': 'hotels4.p.rapidapi.com'
         },
         data: {
@@ -21,7 +21,7 @@ export async function getDetails(hotelId: String) {
       
       try {
           const response = await axios.request(options);
-          return await response;
+          return await response.data;
       } catch (error) {
           console.error(error);
       }

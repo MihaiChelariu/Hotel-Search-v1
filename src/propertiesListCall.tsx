@@ -6,7 +6,7 @@ export async function getPropertiesList(regionId: String) {
         url: 'https://hotels4.p.rapidapi.com/properties/v2/list',
         headers: {
           'content-type': 'application/json',
-          'X-RapidAPI-Key': '193ebaa4b5msh889c774df79466cp112556jsn5dd40c53f272',
+          'X-RapidAPI-Key': '16f6894920msh2be1dfcd82b9b42p1614b2jsn31772ace51f9',
           'X-RapidAPI-Host': 'hotels4.p.rapidapi.com'
         },
         data: {

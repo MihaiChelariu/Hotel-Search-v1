@@ -1,5 +1,4 @@
-import * as React from "react";
-import { getMetaData } from "./metaDataCall"
+import { ChangeEvent, FormEvent, useState } from "react";
 import { getLocations } from "./locationsCall";
 import { getPropertiesList } from "./propertiesListCall";
 import { getDetails } from "./detailsCall";
@@ -7,76 +6,50 @@ import { getDetails } from "./detailsCall";
 import "./App.css";
 import "./output.css";
 
+interface HotelImages{
+  id: String;
+  images: [];
+}
+
 function App() {
-  const [city, setCity] = React.useState("bucharest");
+  const [city, setCity] = useState<String>("");
+  const [hotelImagesMap, setHotelImagesMap] = useState<Map>();
+  // const [hotelIds, setHotelIds] = useState([]);
+  // const [hotelDetailsPromises, setHotelDetailsPromises] = useState([]);
 
-  async function retryIfFailed(error, element) {
-    if (error.response && error.response.status === 429) {
-      await new Promise(resolve => {
-        setTimeout(resolve, 300);
-      });
-      await callWithDelay(element);
-
-    } else {
-      console.error(error.message);
-    }
-  }
-
-  const callWithDelay = async (element) => {
-    try {
-      const response = await getDetails(element);
-      console.log(response);
-    } catch (error) {
-      retryIfFailed(error, element);
-    }
-  };
-
-  const handleCityChange = (event) => {
-    var city = event.target.value;
-
-    setCity(city);
+  const handleCityChange = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
     console.log(city);
-    locations(city).then(regionId => {
-      console.log(regionId);
-      return propertiesList(regionId);
-    }).then(propList => {
 
-      propList?.forEach((element, index) => {
-        setTimeout(() => {
-          callWithDelay(element + "");
-        }, index * 300);
-        // propertyDetails(element.id + "").then(response => {
-        //   console.log(response);
-        // }).catch(err => {
-        //   console.log(err);
-        // });
+    locations(city)
+      .then(regionId => {
+        console.log(regionId);
+        return propertiesList(regionId);
       })
-    }).catch(err => {
-      console.log(err);
-    });
-    const regionId = locations(city);
-
-
-    // regionId.then(regionId => {
-    //   console.log(regionId);
-    //   propertiesList(regionId).then(list => {
-    //     list?.forEach(element => {
-    //       propertyDetails(element).then(value =>
-    //         console.log(value));
-    //     });
-    //   });
-    // });
-
-    // console.log(regionId);
-    // const regionIdNr: string = regionId + "";
-    // console.log(regionIdNr);
-    // propertiesList(regionId);
+      .then(propertyList => {
+        console.log(propertyList);
+        return propertyDetails(propertyList);
+      })
+      .then(hotelList => {
+        console.log(hotelList);
+        var hotelImages = new Map();
+        hotelList.forEach(x => {
+          hotelImages.set(x.data.propertyInfo.summary.name, x.data.propertyInfo.propertyGallery.images);
+        })
+        console.log(hotelImages);
+        setHotelImagesMap(hotelImages);
+        console.log(hotelImagesMap);
+      });
   }
 
   async function locations(city: String) {
-    const locationList: Array<any> = await getLocations(city).then(response => response.sr);
-    const regionId = locationList[0].gaiaId;
-    return regionId;
+    try {
+      var locationList = await getLocations(city).then(response => response.sr);
+      const regionId = locationList[0].gaiaId;
+      return regionId;
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   async function propertiesList(regionId: any) {
@@ -88,29 +61,62 @@ function App() {
     }
   }
 
-  async function propertyDetails(hotelId: String) {
-    const details = await getDetails(hotelId);
-    return details;
+  async function propertyDetails(hotelIds: number[]) {
+    var promiseList = [];
+    var idsList = [];
+    hotelIds.forEach(element => {
+      idsList.push(element.id + "");
+    });
+    for (var i = 0; i < 4; i++) {
+      promiseList.push(await getDetails(idsList[i]).then(response => response));
+    }
+    return promiseList;
   }
 
-  // async function metaData() {
-  //   let metaDataList = await getMetaData();
-  //   console.log(metaDataList);
-  // }
+  const handleInput = (city: ChangeEvent<HTMLInputElement>) => {
+    setCity(city.target.value);
+  }
 
   return (
     <>
-      <h1>Please enter the location you want to travel to: </h1>
-      <div className="center-div">
-        <div className="forms-div">
-          <select name={city} onChange={handleCityChange}>
-            <option value="bucharest">Bucharest</option>
-            <option value="paris">Paris</option>
-            <option value="new york">New York</option>
-            <option value="budapest">Budapest</option>
-          </select>
+      <div className="app-container">
+        <h1>Please enter the location you want to travel to: </h1>
+        <div className="center-div">
+          <div className="forms-div">
+            {/* <select name={city} onChange={handleCityChange}>
+              <option value="bucharest">Bucharest</option>
+              <option value="paris">Paris</option>
+              <option value="new york">New York</option>
+              <option value="budapest">Budapest</option>
+            </select> */}
+            <form className="forms-div" onSubmit={handleCityChange}>
+              <input
+                type="text"
+                name="city"
+                value={city || ""}
+                onChange={handleInput}
+                placeholder="Enter city name"
+              />
+              {/* <input
+                type="text"
+                name="check in"
+                onChange={(e) => setCity(e.target.value)}
+                placeholder="Enter check-in date"
+              /> */}
+              <button type="submit">Search</button>
+            </form>
+            <ul>
+              {
+                hotelImagesMap.map(image => (
+                  <li key={image.ge}></li>
+                )
+
+                )
+              }
+            </ul>
+          </div>
         </div>
-      </div >
+      </div>
     </>
   );
 }
