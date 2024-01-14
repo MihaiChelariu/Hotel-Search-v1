@@ -2,24 +2,20 @@ import { ChangeEvent, FormEvent, useState } from "react";
 import { getLocations } from "./locationsCall";
 import { getPropertiesList } from "./propertiesListCall";
 import { getDetails } from "./detailsCall";
+import { Hotel, HotelComponent } from "./components/hotel";
 
-import "./App.css";
-import "./output.css";
-
-interface HotelImages{
-  id: String;
-  images: [];
-}
+// import "./App.css";
+// import "./output.css";
 
 function App() {
   const [city, setCity] = useState<String>("");
-  const [hotelImagesMap, setHotelImagesMap] = useState<Map>();
-  // const [hotelIds, setHotelIds] = useState([]);
-  // const [hotelDetailsPromises, setHotelDetailsPromises] = useState([]);
+  const [hotelList, setHotelList] = useState<Hotel[]>([]);
+  const [hotelImages, setHotelImages] = useState();
 
   const handleCityChange = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     console.log(city);
+    setHotelList([]);
 
     locations(city)
       .then(regionId => {
@@ -30,15 +26,14 @@ function App() {
         console.log(propertyList);
         return propertyDetails(propertyList);
       })
-      .then(hotelList => {
-        console.log(hotelList);
-        var hotelImages = new Map();
-        hotelList.forEach(x => {
-          hotelImages.set(x.data.propertyInfo.summary.name, x.data.propertyInfo.propertyGallery.images);
-        })
-        console.log(hotelImages);
-        setHotelImagesMap(hotelImages);
-        console.log(hotelImagesMap);
+      .then(hotelDetailsList => {
+        console.log(hotelDetailsList);
+        hotelDetailsList.forEach(detail => {
+          var hotel = new Hotel(detail.data.propertyInfo.summary.name, detail.data.propertyInfo.propertyGallery.images[0].image.url);
+          console.log(hotel);
+          setHotelList((hotelList) => [...hotelList, hotel]);
+        });
+
       });
   }
 
@@ -79,43 +74,31 @@ function App() {
 
   return (
     <>
-      <div className="app-container">
+
+      <div className="center-div">
         <h1>Please enter the location you want to travel to: </h1>
-        <div className="center-div">
-          <div className="forms-div">
-            {/* <select name={city} onChange={handleCityChange}>
-              <option value="bucharest">Bucharest</option>
-              <option value="paris">Paris</option>
-              <option value="new york">New York</option>
-              <option value="budapest">Budapest</option>
-            </select> */}
-            <form className="forms-div" onSubmit={handleCityChange}>
-              <input
-                type="text"
-                name="city"
-                value={city || ""}
-                onChange={handleInput}
-                placeholder="Enter city name"
-              />
-              {/* <input
+        <div className="forms-div">
+          <form className="forms-div" onSubmit={handleCityChange}>
+            <input
+              type="text"
+              name="city"
+              value={city || ""}
+              onChange={handleInput}
+              placeholder="Enter city name"
+            />
+            {/* <input
                 type="text"
                 name="check in"
                 onChange={(e) => setCity(e.target.value)}
                 placeholder="Enter check-in date"
               /> */}
-              <button type="submit">Search</button>
-            </form>
-            <ul>
-              {
-                hotelImagesMap.map(image => (
-                  <li key={image.ge}></li>
-                )
-
-                )
-              }
-            </ul>
-          </div>
+            <button type="submit">Search</button>
+          </form>
         </div>
+        <p>Hotels</p>
+        {hotelList.map((hotel: Hotel) => (
+          <HotelComponent key={hotel.name} name={hotel.name} image={hotel.image} />
+        ))}
       </div>
     </>
   );
