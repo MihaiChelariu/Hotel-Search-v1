@@ -1,6 +1,7 @@
 import axios from "axios";
 
-export async function getPropertiesList(regionId: String) {
+export async function getPropertiesList(regionId: String, checkInDay: number, checkInMonth: number, checkInYear: number, 
+  checkOutDay: number, checkOutMonth: number, checkOutYear: number, peopleNumber: number, sortMethod: String) {
     const options = {
         method: 'POST',
         url: 'https://hotels4.p.rapidapi.com/properties/v2/list',
@@ -18,24 +19,24 @@ export async function getPropertiesList(regionId: String) {
             regionId: regionId
           },
           checkInDate: {
-            day: 10,
-            month: 10,
-            year: 2022
+            day: checkInDay,
+            month: checkInMonth,
+            year: checkInYear
           },
           checkOutDate: {
-            day: 15,
-            month: 10,
-            year: 2022
+            day: checkOutDay,
+            month: checkOutMonth,
+            year: checkOutYear
           },
           rooms: [
             {
-              adults: 2,
+              adults: peopleNumber,
               children: [{age: 5}, {age: 7}]
             }
           ],
           resultsStartingIndex: 0,
           resultsSize: 200,
-          sort: 'PRICE_LOW_TO_HIGH',
+          sort: sortMethod,
           filters: {
             price: {max: 150, min: 100}
           }
@@ -49,4 +50,3 @@ export async function getPropertiesList(regionId: String) {
           console.error(error);
       }
 }
-

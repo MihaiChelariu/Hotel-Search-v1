@@ -1,0 +1,36 @@
+h1{
+    text-align: center;
+}
+
+form {
+    max-width: auto;
+    padding: 20px;
+    background-color: #f4f4f4;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+}
+
+.forms-div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+  
+.forms-div input {
+    margin-bottom: 10px; 
+  }
+
+.forms-div button {
+    padding: 10px 20px;
+    background-color: #4c90af;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+  
+.forms-div button:hover {
+    background-color: #5645a0;
+}

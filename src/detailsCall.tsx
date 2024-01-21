@@ -25,5 +25,4 @@ export async function getDetails(hotelId: String) {
       } catch (error) {
           console.error(error);
       }
-    
 }
